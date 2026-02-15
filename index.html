@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kirill Kolychev - Performance Marketing Manager/Data Analyst</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-deep: #0a1628;
+            --navy-mid: #1a2942;
+            --navy-light: #2d4263;
+            --copper: #d4a574;
+            --copper-light: #e8c9a0;
+            --cream: #f5f1eb;
+            --white: #ffffff;
+            --text-light: #b8c5d6;
+            --accent-blue: #4a7ba7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-mid) 100%);
+            color: var(--text-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(74, 123, 167, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 123, 167, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            padding: 80px 0 60px;
+            border-bottom: 1px solid rgba(212, 165, 116, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212, 165, 116, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-30px, 30px) scale(1.1); }
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-left {
+            flex: 1;
+            opacity: 0;
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 12px;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .title {
+            font-size: 1.4rem;
+            color: var(--copper);
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        .location {
+            font-size: 1rem;
+            color: var(--text-light);
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .location::before {
+            content: '📍';
+            font-size: 1.2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            opacity: 0;
+            animation: slideInRight 0.8s ease-out 0.2s forwards;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 24px;
+            background: rgba(212, 165, 116, 0.08);
+            border-left: 3px solid var(--copper);
+            border-radius: 0 8px 8px 0;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-light);
+        }
+
+        .contact-item:hover {
+            background: rgba(212, 165, 116, 0.15);
+            transform: translateX(8px);
+            border-left-width: 4px;
+        }
+
+        .contact-icon {
+            font-size: 1.3rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        main {
+            padding: 80px 0;
+        }
+
+        section {
+            margin-bottom: 100px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        section:nth-child(1) { animation-delay: 0.4s; }
+        section:nth-child(2) { animation-delay: 0.5s; }
+        section:nth-child(3) { animation-delay: 0.6s; }
+        section:nth-child(4) { animation-delay: 0.7s; }
+        section:nth-child(5) { animation-delay: 0.8s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 48px;
+            position: relative;
+        }
+
+        .section-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            color: var(--copper);
+            opacity: 0.15;
+            line-height: 1;
+            position: absolute;
+            left: -20px;
+            top: -30px;
+            z-index: -1;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--white);
+            position: relative;
+            padding-left: 80px;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--copper) 0%, transparent 100%);
+        }
+
+        /* Summary */
+        .summary-content {
+            background: rgba(29, 41, 66, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 48px;
+            border-radius: 16px;
+            border: 1px solid rgba(212, 165, 116, 0.15);
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--text-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .summary-content::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            color: var(--copper);
+            opacity: 0.1;
+            line-height: 1;
+        }
+
+        .summary-content p {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Experience Timeline */
+        .experience-grid {
+            position: relative;
+        }
+
+        .experience-grid::before {
+            content: '';
+            position: absolute;
+            left: 40px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--copper) 0%, rgba(212, 165, 116, 0.2) 100%);
+        }
+
+        .experience-item {
+            position: relative;
+            margin-bottom: 60px;
+            padding-left: 100px;
+            transition: transform 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateX(10px);
+        }
+
+        .experience-marker {
+            position: absolute;
+            left: 28px;
+            top: 8px;
+            width: 26px;
+            height: 26px;
+            background: var(--navy-mid);
+            border: 3px solid var(--copper);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .experience-item:hover .experience-marker {
+            transform: scale(1.3);
+            box-shadow: 0 0 20px rgba(212, 165, 116, 0.5);
+        }
+
+        .experience-card {
+            background: rgba(29, 41, 66, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 36px;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 165, 116, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover .experience-card {
+            background: rgba(29, 41, 66, 0.7);
+            border-color: rgba(212, 165, 116, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .job-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .company {
+            font-size: 1.15rem;
+            color: var(--copper);
+            font-weight: 600;
+        }
+
+        .period {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            opacity: 0.7;
+            white-space: nowrap;
+            padding: 6px 16px;
+            background: rgba(212, 165, 116, 0.1);
+            border-radius: 20px;
+        }
+
+        .experience-description ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .experience-description li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .experience-description li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--copper);
+            font-size: 1.3rem;
+            line-height: 1.6;
+        }
+
+        /* Education & Certifications */
+        .edu-cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: rgba(29, 41, 66, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 32px;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 165, 116, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--copper) 0%, transparent 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover {
+            background: rgba(29, 41, 66, 0.7);
+            border-color: rgba(212, 165, 116, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .card-subtitle {
+            font-size: 1.05rem;
+            color: var(--copper);
+            margin-bottom: 8px;
+        }
+
+        .card-info {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            opacity: 0.7;
+        }
+
+        /* Skills */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .skill-category {
+            background: rgba(29, 41, 66, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 36px;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 165, 116, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            background: rgba(29, 41, 66, 0.7);
+            border-color: rgba(212, 165, 116, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .skill-category h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--copper);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill-tag {
+            padding: 10px 20px;
+            background: rgba(212, 165, 116, 0.12);
+            border: 1px solid rgba(212, 165, 116, 0.25);
+            border-radius: 8px;
+            color: var(--white);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            background: rgba(212, 165, 116, 0.2);
+            border-color: var(--copper);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 165, 116, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0 40px;
+            border-top: 1px solid rgba(212, 165, 116, 0.2);
+            text-align: center;
+            color: var(--text-light);
+            opacity: 0.7;
+        }
+
+        /* Scroll Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--copper) 0%, var(--copper-light) 100%);
+            z-index: 1000;
+            transform-origin: left;
+            transition: transform 0.1s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+                padding-left: 60px;
+            }
+
+            h2::before {
+                width: 45px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 24px;
+            }
+
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+                padding-left: 0;
+            }
+
+            h2::before {
+                display: none;
+            }
+
+            .section-number {
+                font-size: 3rem;
+                left: -10px;
+                top: -20px;
+            }
+
+            header {
+                padding: 60px 0 40px;
+            }
+
+            main {
+                padding: 60px 0;
+            }
+
+            section {
+                margin-bottom: 70px;
+            }
+
+            .experience-grid::before {
+                left: 20px;
+            }
+
+            .experience-item {
+                padding-left: 60px;
+            }
+
+            .experience-marker {
+                left: 8px;
+                width: 22px;
+                height: 22px;
+            }
+
+            .experience-card {
+                padding: 24px;
+            }
+
+            .summary-content {
+                padding: 32px 24px;
+            }
+
+            .skills-container,
+            .edu-cert-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection color */
+        ::selection {
+            background: var(--copper);
+            color: var(--navy-deep);
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>Kirill Kolychev</h1>
+                    <div class="title">Performance Marketing Manager / Data Analyst</div>
+                    <div class="location">England, United Kingdom</div>
+                </div>
+                <div class="contact-info">
+                    <a href="mailto:inrz123@gmail.com" class="contact-item">
+                        <span class="contact-icon">✉️</span>
+                        <span>inrz123@gmail.com</span>
+                    </a>
+                    <a href="tel:+447467314330" class="contact-item">
+                        <span class="contact-icon">📱</span>
+                        <span>+44 746 731 4330</span>
+                    </a>
+                    <a href="https://linkedin.com/in/kirill-kolychev-1a020a159" target="_blank" class="contact-item">
+                        <span class="contact-icon">💼</span>
+                        <span>LinkedIn Profile</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section id="summary">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2>Summary</h2>
+                </div>
+                <div class="summary-content">
+                    <p>Results-driven Data Analyst and Performance Marketing Manager with 7 years of comprehensive experience spanning data analytics, business intelligence, and high-budget digital marketing campaign management. Expert in transforming complex data into actionable insights through advanced SQL, Python, DBT, and visualization platforms including Power BI, Looker, Excel, and GA4. Successfully managed enterprise-level marketing campaigns with monthly budgets ranging from $100k to $1.5 million across Google Ads, Bing Ads, LinkedIn, Facebook, Apple Search Ads, and DV360. Specialized in building scalable data pipelines, automation solutions that improve team efficiency, and interactive dashboards that drive strategic marketing decisions. Combines technical expertise with strong stakeholder communication skills to bridge the gap between data insights and business strategy.</p>
+                </div>
+            </section>
+
+            <section id="experience">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2>Experience</h2>
+                </div>
+                <div class="experience-grid">
+                    <div class="experience-item">
+                        <div class="experience-marker"></div>
+                        <div class="experience-card">
+                            <div class="experience-header">
+                                <div>
+                                    <div class="job-title">Senior Marketing Analyst</div>
+                                    <div class="company">Farfetch • London, UK</div>
+                                </div>
+                                <div class="period">December 2024 - Present</div>
+                            </div>
+                            <div class="experience-description">
+                                <ul>
+                                    <li>Designed and implemented scalable dashboard framework to support daily reporting and deep-dive analysis for the marketing team.</li>
+                                    <li>Led automation initiatives to streamline routine marketing tasks, including managing partner tools for Pay-Per-Click (PPC) automation, improving efficiency and accuracy.</li>
+                                    <li>Diagnosed and resolved tracking issues by identifying gaps in the marketing attribution setup, enhancing data integrity across platforms.</li>
+                                    <li>Collaborated with PPC teams to uncover growth opportunities through data analysis, delivering actionable recommendations that drove performance improvements.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-marker"></div>
+                        <div class="experience-card">
+                            <div class="experience-header">
+                                <div>
+                                    <div class="job-title">Marketing Insight Analyst</div>
+                                    <div class="company">The StepStone Group • London</div>
+                                </div>
+                                <div class="period">November 2022 - October 2024</div>
+                            </div>
+                            <div class="experience-description">
+                                <ul>
+                                    <li>Analyzed marketing data to identify trends and develop insights that informed future marketing decisions and drove user acquisition.</li>
+                                    <li>Using GA4 for data analysis and uploading custom events via Big Query to increase marketing efficiency and targeting accuracy.</li>
+                                    <li>Developed scalable data pipelines utilizing Python, SQL, Excel, and DBT, improving the speed of insight delivery and expanding marketing channels.</li>
+                                    <li>Designed and implemented interactive Power BI dashboards that revamped data visualization, driving a 20% increase in data-driven decision accuracy for channel managers.</li>
+                                    <li>Developed and implemented an automated solution that saved marketing managers 15% of time.</li>
+                                    <li>Developed and integrated n-gram analysis, enhancing decision-making processes for SEA Managers, resulting in up to a 20% reduction in costs on Bing Ads and Google Ads.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-marker"></div>
+                        <div class="experience-card">
+                            <div class="experience-header">
+                                <div>
+                                    <div class="job-title">Marketing Analyst</div>
+                                    <div class="company">Yandex • Moscow</div>
+                                </div>
+                                <div class="period">August 2021 - August 2022</div>
+                            </div>
+                            <div class="experience-description">
+                                <ul>
+                                    <li>Conducted comprehensive analysis of marketing campaigns, identifying opportunities for growth and providing strategic recommendations to optimize client performance within Yandex's platform.</li>
+                                    <li>Constructed data pipelines utilizing SQL and visualization tools, resulting in comprehensive dashboards and accurate forecasts.</li>
+                                    <li>Developed and deployed internal analytical products and automation tools to streamline routine marketing activities using Python and SQL, enhancing task efficiency by 30%.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-marker"></div>
+                        <div class="experience-card">
+                            <div class="experience-header">
+                                <div>
+                                    <div class="job-title">Senior UA Manager</div>
+                                    <div class="company">Mail.ru • Moscow</div>
+                                </div>
+                                <div class="period">November 2020 - August 2021</div>
+                            </div>
+                            <div class="experience-description">
+                                <ul>
+                                    <li>Designed data-driven campaigns in Yandex Direct and Google Ads, incorporated advanced targeting in Apple Search Ads, Yandex.Market, and DV360.</li>
+                                    <li>Crafted data-driven media strategies, increasing campaign reach and engagement metrics by integrating multiple advertising platforms and a/b testing.</li>
+                                    <li>Utilized Yandex Metrica, Google Analytics, and Appsflyer to optimize user acquisition campaigns, delivering a 25% increase in conversion rates while effectively communicating performance metrics to stakeholders.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-marker"></div>
+                        <div class="experience-card">
+                            <div class="experience-header">
+                                <div>
+                                    <div class="job-title">Senior PPC Specialist</div>
+                                    <div class="company">Tinkoff Bank / SberBank • Moscow</div>
+                                </div>
+                                <div class="period">March 2018 - October 2020</div>
+                            </div>
+                            <div class="experience-description">
+                                <ul>
+                                    <li>Developed and executed multi-channel marketing strategies, leveraging Google Ads and Yandex Direct to achieve optimal results and high-performing campaigns.</li>
+                                    <li>Developed detailed marketing reports by leveraging Google Analytics, Yandex Metrika, Excel, Power Query, and pivot tables, providing key insights into campaign performance and ROI.</li>
+                                    <li>Developed in-house training documentation covering best PPC practices and tool usage, which accelerated onboarding processes by 30%.</li>
+                                    <li>Achieved a 35% increase in ROI and a 25% reduction in cost-per-click through the strategic management of PPC campaigns across Google Ads and Yandex Direct platforms over a six-month period in Sber.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="education">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2>Education</h2>
+                </div>
+                <div class="edu-cert-grid">
+                    <div class="card">
+                        <div class="card-title">Bachelor of Foreign Languages</div>
+                        <div class="card-subtitle">Tula State Pedagogical University</div>
+                        <div class="card-info">Tula • 2011-2015</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="certifications">
+                <div class="section-header">
+                    <span class="section-number">04</span>
+                    <h2>Certifications</h2>
+                </div>
+                <div class="edu-cert-grid">
+                    <div class="card">
+                        <div class="card-title">Python (Basic)</div>
+                        <div class="card-subtitle">HackerRank</div>
+                        <div class="card-info">2024</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">SQL (Advanced)</div>
+                        <div class="card-subtitle">HackerRank</div>
+                        <div class="card-info">2024</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Google Analytics</div>
+                        <div class="card-subtitle">Google</div>
+                        <div class="card-info">2024</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Google Ads Search</div>
+                        <div class="card-subtitle">Google</div>
+                        <div class="card-info">2024</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Google Ads Display</div>
+                        <div class="card-subtitle">Google</div>
+                        <div class="card-info">2024</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">IELTS Certificate - C1</div>
+                        <div class="card-subtitle">IELTS</div>
+                        <div class="card-info">London • 2023</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="skills">
+                <div class="section-header">
+                    <span class="section-number">05</span>
+                    <h2>Skills</h2>
+                </div>
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <h3>Technical Skills</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">DBT</span>
+                            <span class="skill-tag">VBA</span>
+                            <span class="skill-tag">DAX</span>
+                            <span class="skill-tag">Data Analysis</span>
+                            <span class="skill-tag">Data Visualization</span>
+                            <span class="skill-tag">Statistics</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Soft Skills</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Strategic Planning</span>
+                            <span class="skill-tag">Efficiency Optimization</span>
+                            <span class="skill-tag">Stakeholder Communication</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Areas of Interest</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Marketing Campaign Optimization</span>
+                            <span class="skill-tag">Data-Driven Decision Making</span>
+                            <span class="skill-tag">Automation in Marketing Analytics</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2025 Kirill Kolychev. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Progress bar animation
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        });
+
+        // Smooth reveal on scroll for additional elements
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards for additional scroll animations
+        document.querySelectorAll('.card, .skill-category').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Add subtle parallax effect to header background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('header::after');
+            if (scrolled < 500) {
+                document.querySelector('header').style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
